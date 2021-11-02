@@ -11,10 +11,16 @@ Thank you.
 * [Youtube ESP32-S2 Projects](https://www.youtube.com/playlist?list=PLnq7JUnBumAyqwFbaS0L65VFUXKTGjtpQ)
 
 
+# [ESP32-S2 | Native USB Serial Speed]
+[[Video]](https://youtu.be/-O-Bvscjx14)
+
+<img width="800" src="https://github.com/0015/ESP32-S2-Projects/blob/master/misc/0_native_usb_speed_test.png">
+
+
 ### Created & Maintained By
 
 [Eric Nam](https://github.com/0015)
-([Youtube](https://www.youtube.com/channel/UCRr2LnXXXuHn4z0rBvpfG7w))
+([Youtube](https://youtube.com/c/ThatProject))
 ([Facebook](https://www.facebook.com/groups/138965931539175))
 
 
