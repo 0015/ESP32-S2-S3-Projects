@@ -10,6 +10,12 @@ Thank you.
 
 * [Youtube ESP32-S2 Projects](https://www.youtube.com/playlist?list=PLnq7JUnBumAyqwFbaS0L65VFUXKTGjtpQ)
 
+#### [brute-force USB Keyboard using ESP32-S2]
+[[Video]](https://youtu.be/AJ1lSk_aK6M) [[Source Code]](https://github.com/0015/ESP32-S2-Projects/tree/main/Brute-force_Keyboard/Brute-force_Keyboard_0.1)
+
+<img width="800" src="https://github.com/0015/ESP32-S2-Projects/blob/main/misc/1_brute-force_usb_keyboard.png">
+
+---
 
 #### [ESP32-S2 | Native USB Serial Speed]
 [[Video]](https://youtu.be/-O-Bvscjx14)
