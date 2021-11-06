@@ -1,3 +1,12 @@
+/////////////////////////////////////////////////////////////////
+/*
+  Cracking password on Mac?? Brute-force USB Keyboard using ESP32-S2 (based on Keyset)
+  Video Tutorial: https://youtu.be/AJ1lSk_aK6M
+  Created by Eric N. (ThatProject)
+*/
+/////////////////////////////////////////////////////////////////
+
+
 #include "MainProgram.hpp"
 #include "USB.h"
 #include "USBHIDKeyboard.h"
