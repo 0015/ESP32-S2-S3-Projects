@@ -4,11 +4,18 @@ Welcome to my project repository.
 The source code for each project can be downloaded here, and please refer to the below video for the project tutorial.
 Thank you.
   
-* [Youtube Channel](https://youtube.com/c/ThatProject) 
+* [Youtube Channel](https://youtube.com/ThatProject) 
 
 ## ESP32-S2 Projects
 
 * [Youtube ESP32-S2 Projects](https://www.youtube.com/playlist?list=PLnq7JUnBumAyqwFbaS0L65VFUXKTGjtpQ)
+
+#### [ESP32-S2 UVC Stream to LCD]
+[[Video]](https://youtu.be/lAVtS-HdMpo) [[Source Code]](https://github.com/0015/ESP32-S2-Projects/tree/main/usb_camera_lcd_display)
+
+<img width="600" src="https://github.com/0015/ESP32-S2-Projects/blob/main/misc/2_ESP32-S2_UVC_Stream_to_LCD.gif">
+
+---
 
 #### [Auto Key Input USB Keyboard using ESP32-S2 (based on Keyset)]
 [[Video]](https://youtu.be/AJ1lSk_aK6M) [[Source Code]](https://github.com/0015/ESP32-S2-Projects/tree/main/Brute-force_Keyboard/Brute-force_Keyboard_0.1)
@@ -32,7 +39,7 @@ Thank you.
 
 ## License
 
-Copyright 2019 - 2021 Eric N
+Copyright 2019 - 2022 Eric N
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
