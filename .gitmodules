@@ -1,0 +1,3 @@
+[submodule "usb_camera_lcd_display/components/LovyanGFX"]
+	path = usb_camera_lcd_display/components/LovyanGFX
+	url = https://github.com/lovyan03/LovyanGFX.git
