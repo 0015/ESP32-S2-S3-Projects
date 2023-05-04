@@ -7,7 +7,7 @@ Thank you.
 
 ## ESP32-S2/S3 Projects
 
-* [Youtube ESP32-S2 Projects](https://www.youtube.com/playlist?list=PLnq7JUnBumAyqwFbaS0L65VFUXKTGjtpQ)
+* [Youtube ESP32-S2/S3 Projects](https://www.youtube.com/playlist?list=PLnq7JUnBumAyqwFbaS0L65VFUXKTGjtpQ)
 
 #### [How to Create a Custom Hardware Hotkey to Mute Your Microphone in Zoom using ESP32-S3]
 [[Video]](https://youtu.be/u1t1nMzyvqg) [[Source Code]](https://github.com/0015/ESP32-S2-S3-Projects/tree/main/zoom_mic_muter)
