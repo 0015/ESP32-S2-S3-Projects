@@ -1,19 +1,18 @@
 # That Project
 
-Welcome to my project repository. 
-The source code for each project can be downloaded here, and please refer to the below video for the project tutorial.
+Here you can find projects related to the native USB interface of ESP32 S2/S3. The source code for each project can be downloaded here, and please refer to the below video for the project tutorial.
 Thank you.
   
 * [Youtube Channel](https://youtube.com/ThatProject) 
 
-## ESP32-S2 Projects
+## ESP32-S2/S3 Projects
 
 * [Youtube ESP32-S2 Projects](https://www.youtube.com/playlist?list=PLnq7JUnBumAyqwFbaS0L65VFUXKTGjtpQ)
 
-#### [ESP32-S2 UVC Stream to LCD]
-[[Video]](https://youtu.be/lAVtS-HdMpo) [[Source Code]](https://github.com/0015/ESP32-S2-Projects/tree/main/usb_camera_lcd_display)
+#### [How to Create a Custom Hardware Hotkey to Mute Your Microphone in Zoom using ESP32-S3]
+[[Video]](https://youtu.be/u1t1nMzyvqg) [[Source Code]](https://github.com/0015/ESP32-S2-S3-Projects/tree/main/zoom_mic_muter)
 
-<img width="600" src="https://github.com/0015/ESP32-S2-Projects/blob/main/misc/2_ESP32-S2_UVC_Stream_to_LCD.gif">
+<img width="600" src="https://github.com/0015/ESP32-S2-Projects/blob/main/misc/3_Zoom_Muter_USBHID.gif">
 
 ---
 
