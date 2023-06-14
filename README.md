@@ -9,6 +9,13 @@ Thank you.
 
 * [Youtube ESP32-S2/S3 Projects](https://www.youtube.com/playlist?list=PLnq7JUnBumAyqwFbaS0L65VFUXKTGjtpQ)
 
+#### [We can create a voice command system!]
+[[Video]](https://youtu.be/3XbnzfBjmZk) [[Source Code]](https://github.com/0015/esp-skainet/tree/ESP32-S3-Devkit-C)
+
+<img width="600" src="https://github.com/0015/ESP32-S2-Projects/blob/main/misc/4_Voice_User_Interface.jpg">
+
+---
+
 #### [How to Create a Custom Hardware Hotkey to Mute Your Microphone in Zoom using ESP32-S3]
 [[Video]](https://youtu.be/u1t1nMzyvqg) [[Source Code]](https://github.com/0015/ESP32-S2-S3-Projects/tree/main/zoom_mic_muter)
 
