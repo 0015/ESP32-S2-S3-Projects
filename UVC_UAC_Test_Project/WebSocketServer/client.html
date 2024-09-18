@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UVC + UAC Tester</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #FFFFFF;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            min-width: 400px;
+            text-align: center;
+            background-color: #1E1E1E;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .history {
+            width: 100%;
+            max-width: 400px;
+            height: 600px;
+            overflow-y: auto;
+            margin-left: 20px;
+            background-color: #2E2E2E;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .control-button {
+            background-color: #3E3E3E;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .control-button:hover {
+            background-color: #575757;
+        }
+
+        .checkbox-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-section label {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-section input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .slider-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .slider-container input[type="range"] {
+            width: 80%;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        /* Hide Pause and Play buttons initially */
+        #pauseBtn, #continueBtn {
+            display: none;
+        }
+
+        .history-log {
+            font-size: 14px;
+            line-height: 1.4;
+            color: #FFF;
+            font-family: monospace;
+        }
+
+        .history-log div {
+            margin-bottom: 10px;
+            padding: 8px;
+            background-color: #3E3E3E;
+            border-radius: 4px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 800px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .history {
+                max-width: 100%;
+                margin-left: 0;
+                margin-top: 20px;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="container">
+            <h1>UVC + UAC Tester(with Raw Data)</h1>
+
+            <!-- Connection Section -->
+            <div class="controls">
+                <button id="connectBtn" class="control-button" onclick="toggleConnection()">Connect</button>
+                <button id="pauseBtn" class="control-button" onclick="pause()" disabled>Pause</button>
+                <button id="continueBtn" class="control-button" onclick="continuePlay()" disabled>Resume</button>
+            </div>
+
+            <!-- Checkbox Section -->
+            <div class="checkbox-section">
+                <label>
+                    <input type="checkbox" id="audioCheckbox" onchange="toggleAudio()"> Receive Audio
+                </label>
+            </div>
+
+            <!-- Audio Slider Section -->
+            <div class="slider-container">
+                <span>Audio Volume: </span>
+                <input type="range" max="1" value="0.5" min="0" id="range" onchange="changeVolume(event)" step="0.1">
+            </div>
+
+            <div class="checkbox-section">
+                <label>
+                    <input type="checkbox" id="imageCheckbox" checked onchange="toggleImage()"> Receive Image
+                </label>
+            </div>
+
+            <!-- Image Display -->
+            <img id="imageDisplay" src="" alt="Image will appear here">
+        </div>
+
+        <!-- Event History Section -->
+        <div class="history">
+            <h2>Event History</h2>
+            <div id="historyLog" class="history-log"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/pcm-player"></script>
+    <script>
+        let isConnected = false;
+        let player;
+        let urlObject;
+        let ws;
+        let packetIndex = 0;
+
+        const connectBtn = document.getElementById('connectBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const continueBtn = document.getElementById('continueBtn');
+        const audioCheckbox = document.getElementById('audioCheckbox');
+        const imageCheckbox = document.getElementById('imageCheckbox');
+        const img = document.getElementById('imageDisplay');
+        const historyLog = document.getElementById('historyLog');
+
+        function toggleConnection() {
+            if (isConnected) {
+                disconnect();
+            } else {
+                connect();
+            }
+        }
+
+        function connect() {
+            connectBtn.innerText = 'Disconnect';
+            isConnected = true;
+            showPlaybackControls(true);
+
+            player = new PCMPlayer({
+                inputCodec: 'Int16',
+                channels: 1,
+                sampleRate: 16000
+            });
+
+            ws = new WebSocket('ws://[LocalIP]:8080');
+            ws.binaryType = 'arraybuffer';
+
+            ws.onopen = () => {
+                logHistory('Connected to WebSocket server');
+            };
+
+            let currentMessage = null;
+             ws.onmessage = (event) => {
+                if (!continueBtn.disabled) return;
+
+
+                if (typeof event.data === "string") {
+                    currentMessage = JSON.parse(event.data);
+                } else if (audioCheckbox.checked && currentMessage && currentMessage.type === "audio") {
+                    player.feed(event.data);
+
+                    logHistory(`[Packet ${packetIndex++}] Audio: ${event.data.byteLength} bytes`);
+                } else if (imageCheckbox.checked && currentMessage && currentMessage.type === "image") {
+                    if (urlObject) URL.revokeObjectURL(urlObject);
+                    urlObject = URL.createObjectURL(new Blob([event.data]));
+                    img.src = urlObject;
+
+                    logHistory(`[Packet ${packetIndex++}] Image: ${event.data.byteLength} bytes`);
+                }
+            };
+
+            ws.onclose = () => {
+                logHistory('Disconnected from WebSocket');
+                connectBtn.innerText = 'Connect';
+                isConnected = false;
+                showPlaybackControls(false);
+            };
+
+        }
+
+        function disconnect() {
+            if (ws) {
+                ws.close();
+            }
+        }
+
+        function pause() {
+            pauseBtn.disabled = true;
+            continueBtn.disabled = false;
+            player.pause();
+            logHistory('Playback paused');
+        }
+
+        function continuePlay() {
+            continueBtn.disabled = true;
+            pauseBtn.disabled = false;
+            player.continue();
+            logHistory('Playback resumed');
+        }
+
+        function toggleAudio() {
+            const audioChecked = document.getElementById('audioCheckbox').checked;
+            ws.send(JSON.stringify({ command: 'toggleAudio', enabled: audioChecked }));
+            logHistory(`Audio ${audioChecked ? 'enabled' : 'disabled'}`);
+        }
+
+        function toggleImage() {
+            const imageChecked = document.getElementById('imageCheckbox').checked;
+            ws.send(JSON.stringify({ command: 'toggleImage', enabled: imageChecked }));
+            logHistory(`Image ${imageChecked ? 'enabled' : 'disabled'}`);   
+        }
+
+        function changeVolume(e) {
+            player.volume(document.getElementById('range').value);
+            logHistory(`Volume set to ${event.target.value}`);
+        }
+
+        function showPlaybackControls(show) {
+            pauseBtn.style.display = show ? 'inline-block' : 'none';
+            continueBtn.style.display = show ? 'inline-block' : 'none';
+
+            if(show){
+                pauseBtn.disabled = false;
+                continueBtn.disabled = true;
+            }
+        }
+
+        function logHistory(message) {
+            const logEntry = document.createElement('div');
+            logEntry.innerText = message;
+            historyLog.prepend(logEntry);
+
+            while (historyLog.childElementCount > 30) {
+                historyLog.removeChild(historyLog.lastChild);
+            }
+        }
+
+    </script>
+</body>
+</html>

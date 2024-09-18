@@ -1,0 +1,16 @@
+{
+  "name": "wsAudioServer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Eric Nam",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.20.0",
+    "ws": "^7.4.6"
+  }
+}
