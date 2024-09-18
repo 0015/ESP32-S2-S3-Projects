@@ -9,6 +9,13 @@ Thank you.
 
 * [Youtube ESP32-S2/S3 Projects](https://www.youtube.com/playlist?list=PLnq7JUnBumAyqwFbaS0L65VFUXKTGjtpQ)
 
+#### [UVC & UAC Test with WebSocket Server]
+[[Video]](https://youtu.be/Hi-6Y12Jhgs) [[Source Code]](https://github.com/0015/ESP32-S2-S3-Projects/tree/main/UVC_UAC_Test_Project)
+
+<img width="600" src="https://github.com/0015/ESP32-S2-Projects/blob/main/misc/5_UVC_UAC_Test.jpg">
+
+---
+
 #### [We can create a voice command system!]
 [[Video]](https://youtu.be/3XbnzfBjmZk) [[Source Code]](https://github.com/0015/esp-skainet/tree/ESP32-S3-Devkit-C)
 
@@ -45,7 +52,7 @@ Thank you.
 
 ## License
 
-Copyright 2019 - 2022 Eric N
+Copyright 2019 - 2024 Eric N
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
